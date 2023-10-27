@@ -47,5 +47,15 @@ namespace SistemaCensoPET
                 MessageBox.Show("Coexão Aberta");
             }
         }
+
+        private void toolStripBtnNovo_Click(object sender, EventArgs e)
+        {
+            TxtNome.Text = "";
+            TxtEndereco.Text = "";
+            TxtNumero.Text = "";
+            TxtCep.Text = "";
+            //Colocamos o foco na caixa de texto do nome do condominio
+            TxtNome.Focus();
+        }
     }
 }

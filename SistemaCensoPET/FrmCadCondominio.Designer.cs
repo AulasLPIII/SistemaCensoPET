@@ -66,6 +66,7 @@
             toolStripBtnNovo.Name = "toolStripBtnNovo";
             toolStripBtnNovo.Size = new Size(68, 68);
             toolStripBtnNovo.Text = "Novo";
+            toolStripBtnNovo.Click += toolStripBtnNovo_Click;
             // 
             // toolStripSeparator1
             // 
