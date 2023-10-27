@@ -36,6 +36,14 @@
             toolStripBtnListar = new ToolStripButton();
             toolStripSeparator3 = new ToolStripSeparator();
             toolStripBtnApagar = new ToolStripButton();
+            LblNome = new Label();
+            LblEndereco = new Label();
+            LblNumero = new Label();
+            LblCep = new Label();
+            TxtNome = new TextBox();
+            TxtEndereco = new TextBox();
+            TxtNumero = new TextBox();
+            TxtCep = new TextBox();
             barraFerramentas.SuspendLayout();
             SuspendLayout();
             // 
@@ -45,7 +53,7 @@
             barraFerramentas.Items.AddRange(new ToolStripItem[] { toolStripBtnNovo, toolStripSeparator1, toolStripBtnSalvar, toolStripSeparator2, toolStripBtnListar, toolStripSeparator3, toolStripBtnApagar });
             barraFerramentas.Location = new Point(0, 0);
             barraFerramentas.Name = "barraFerramentas";
-            barraFerramentas.Size = new Size(800, 71);
+            barraFerramentas.Size = new Size(691, 71);
             barraFerramentas.TabIndex = 0;
             barraFerramentas.Text = "toolStrip1";
             // 
@@ -73,6 +81,7 @@
             toolStripBtnSalvar.Name = "toolStripBtnSalvar";
             toolStripBtnSalvar.Size = new Size(68, 68);
             toolStripBtnSalvar.Text = "Salvar";
+            toolStripBtnSalvar.Click += toolStripBtnSalvar_Click;
             // 
             // toolStripSeparator2
             // 
@@ -104,11 +113,91 @@
             toolStripBtnApagar.Size = new Size(68, 68);
             toolStripBtnApagar.Text = "Apagar";
             // 
+            // LblNome
+            // 
+            LblNome.AutoSize = true;
+            LblNome.Font = new Font("Arial", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            LblNome.Location = new Point(60, 107);
+            LblNome.Name = "LblNome";
+            LblNome.Size = new Size(79, 26);
+            LblNome.TabIndex = 1;
+            LblNome.Text = "Nome:";
+            // 
+            // LblEndereco
+            // 
+            LblEndereco.AutoSize = true;
+            LblEndereco.Font = new Font("Arial", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            LblEndereco.Location = new Point(23, 160);
+            LblEndereco.Name = "LblEndereco";
+            LblEndereco.Size = new Size(116, 26);
+            LblEndereco.TabIndex = 2;
+            LblEndereco.Text = "Endereço:";
+            // 
+            // LblNumero
+            // 
+            LblNumero.AutoSize = true;
+            LblNumero.Font = new Font("Arial", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            LblNumero.Location = new Point(39, 213);
+            LblNumero.Name = "LblNumero";
+            LblNumero.Size = new Size(100, 26);
+            LblNumero.TabIndex = 3;
+            LblNumero.Text = "Número:";
+            // 
+            // LblCep
+            // 
+            LblCep.AutoSize = true;
+            LblCep.Font = new Font("Arial", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            LblCep.Location = new Point(79, 276);
+            LblCep.Name = "LblCep";
+            LblCep.Size = new Size(60, 26);
+            LblCep.TabIndex = 4;
+            LblCep.Text = "Cep:";
+            // 
+            // TxtNome
+            // 
+            TxtNome.Font = new Font("Arial", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            TxtNome.Location = new Point(161, 100);
+            TxtNome.Name = "TxtNome";
+            TxtNome.Size = new Size(471, 34);
+            TxtNome.TabIndex = 5;
+            // 
+            // TxtEndereco
+            // 
+            TxtEndereco.Font = new Font("Arial", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            TxtEndereco.Location = new Point(161, 152);
+            TxtEndereco.Name = "TxtEndereco";
+            TxtEndereco.Size = new Size(471, 34);
+            TxtEndereco.TabIndex = 6;
+            // 
+            // TxtNumero
+            // 
+            TxtNumero.Font = new Font("Arial", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            TxtNumero.Location = new Point(161, 205);
+            TxtNumero.Name = "TxtNumero";
+            TxtNumero.Size = new Size(188, 34);
+            TxtNumero.TabIndex = 7;
+            // 
+            // TxtCep
+            // 
+            TxtCep.Font = new Font("Arial", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            TxtCep.Location = new Point(161, 268);
+            TxtCep.Name = "TxtCep";
+            TxtCep.Size = new Size(188, 34);
+            TxtCep.TabIndex = 8;
+            // 
             // FrmCadCondominio
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(691, 335);
+            Controls.Add(TxtCep);
+            Controls.Add(TxtNumero);
+            Controls.Add(TxtEndereco);
+            Controls.Add(TxtNome);
+            Controls.Add(LblCep);
+            Controls.Add(LblNumero);
+            Controls.Add(LblEndereco);
+            Controls.Add(LblNome);
             Controls.Add(barraFerramentas);
             MaximizeBox = false;
             MinimizeBox = false;
@@ -131,5 +220,13 @@
         private ToolStripButton toolStripBtnListar;
         private ToolStripSeparator toolStripSeparator3;
         private ToolStripButton toolStripBtnApagar;
+        private Label LblNome;
+        private Label LblEndereco;
+        private Label LblNumero;
+        private Label LblCep;
+        private TextBox TxtNome;
+        private TextBox TxtEndereco;
+        private TextBox TxtNumero;
+        private TextBox TxtCep;
     }
 }

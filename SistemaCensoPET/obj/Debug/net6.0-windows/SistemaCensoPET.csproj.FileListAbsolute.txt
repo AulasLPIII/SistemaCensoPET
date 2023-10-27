@@ -17,3 +17,5 @@ C:\Users\Mauro Lopes\Documents\LP3_2023\SistemaCensoPET\SistemaCensoPET\obj\Debu
 C:\Users\Mauro Lopes\Documents\LP3_2023\SistemaCensoPET\SistemaCensoPET\obj\Debug\net6.0-windows\ref\SistemaCensoPET.dll
 C:\Users\Mauro Lopes\Documents\LP3_2023\SistemaCensoPET\SistemaCensoPET\obj\Debug\net6.0-windows\SistemaCensoPET.FrmCadCondominio.resources
 C:\Users\Mauro Lopes\Documents\LP3_2023\SistemaCensoPET\SistemaCensoPET\obj\Debug\net6.0-windows\SistemaCensoPET.Properties.Resources.resources
+C:\Users\Mauro Lopes\Documents\LP3_2023\SistemaCensoPET\SistemaCensoPET\bin\Debug\net6.0-windows\MySqlConnector.dll
+C:\Users\Mauro Lopes\Documents\LP3_2023\SistemaCensoPET\SistemaCensoPET\obj\Debug\net6.0-windows\SistemaCensoPET.csproj.CopyComplete
