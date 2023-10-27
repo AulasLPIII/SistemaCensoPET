@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MySqlConnector;
 
 namespace SistemaCensoPET
 {
@@ -32,6 +33,19 @@ namespace SistemaCensoPET
 
             //Saída de Dados
             MessageBox.Show(nome + "\n" + endereco + "\n" + numero + "\n" + cep);
+
+            //Conexao com o Banco de Dados
+            string strconexao = "";
+            //String de Conexao com o Banco de Dados
+            strconexao = "server=localhost;userid=professor;password=professor@;database=bdcensopet";
+            //Criação do Canal de Comunicação
+            MySqlConnection con = new MySqlConnection(strconexao);
+            //O canal é criado fechado, para usarmos devemos abrí-lo
+            con.Open();
+            if (con.State == ConnectionState.Open)
+            {
+                MessageBox.Show("Coexão Aberta");
+            }
         }
     }
 }
