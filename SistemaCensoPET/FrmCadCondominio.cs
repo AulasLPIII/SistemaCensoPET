@@ -31,9 +31,6 @@ namespace SistemaCensoPET
             cep_num = Convert.ToInt32(cep);
             numero_num = Convert.ToInt32(numero);
 
-            //Saída de Dados
-            MessageBox.Show(nome + "\n" + endereco + "\n" + numero + "\n" + cep);
-
             //Conexao com o Banco de Dados
             string strconexao = "";
             //String de Conexao com o Banco de Dados
@@ -42,9 +39,34 @@ namespace SistemaCensoPET
             MySqlConnection con = new MySqlConnection(strconexao);
             //O canal é criado fechado, para usarmos devemos abrí-lo
             con.Open();
-            if (con.State == ConnectionState.Open)
+            //Comando SQL (insert)
+            string comandosql = "insert into condominio (nome, endereco, numero, cep) values (@nome,@endereco,@numero,@cep)";
+            //Criacao do objeto de comando (envelope)
+            MySqlCommand envelope = new MySqlCommand();
+            //Indica ao envelope por qual canal de comunicacao ele será enviado
+            envelope.Connection = con;
+            //Coloca o comando SQL dentro do envelope
+            envelope.CommandText = comandosql;
+            //Neste ponto estamos dando ao parâmetro "@nome" o valor da variável "nome"
+            envelope.Parameters.AddWithValue("@nome", nome);
+            //As três linhas abaixo (comentadas) fazem a mesma ação da unica linha acima
+            //MySqlParameter parameter = new MySqlParameter();
+            //parameter.ParameterName = "@nome";
+            //parameter.Value = nome;
+            //Neste ponto estamos dando ao parâmetro "@endereco" o valor da variável "endereco"
+            envelope.Parameters.AddWithValue("@endereco", endereco);
+            //Neste ponto estamos dando ao parâmetro "@numero" o valor da variável "numero_num"
+            envelope.Parameters.AddWithValue("@numero", numero_num);
+            //Neste ponto estamos dando ao parâmetro "@cep" o valor da variável "cep"
+            envelope.Parameters.AddWithValue("@cep", cep);
+            //Cria uma versão preparada do comando em uma instância do SQL Server.
+            envelope.Prepare();
+            //Executa o comando SQL na instância apontada
+            //Ele retorna um valor inteiro que representa a quantidade de linhas afetadas
+            int retorno = envelope.ExecuteNonQuery();
+            if (retorno > 0) 
             {
-                MessageBox.Show("Coexão Aberta");
+                MessageBox.Show("Dados salvos com Sucesso!!!");
             }
         }
 
