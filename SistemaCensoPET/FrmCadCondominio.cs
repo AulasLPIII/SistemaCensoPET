@@ -64,7 +64,7 @@ namespace SistemaCensoPET
             //Executa o comando SQL na instância apontada
             //Ele retorna um valor inteiro que representa a quantidade de linhas afetadas
             int retorno = envelope.ExecuteNonQuery();
-            if (retorno > 0) 
+            if (retorno > 0)
             {
                 MessageBox.Show("Dados salvos com Sucesso!!!");
             }
@@ -78,6 +78,34 @@ namespace SistemaCensoPET
             TxtCep.Text = "";
             //Colocamos o foco na caixa de texto do nome do condominio
             TxtNome.Focus();
+        }
+
+        private void toolStripBtnListar_Click(object sender, EventArgs e)
+        {
+            //String de Conexao com o Banco de Dados
+            string strconexao = "server=localhost;userid=professor;password=professor@;database=bdcensopet";
+            //Criação do Canal de Comunicação
+            MySqlConnection con = new MySqlConnection(strconexao);
+            //O canal é criado fechado, para usarmos devemos abrí-lo
+            con.Open();
+            //Comando SQL (SELECT)
+            //Perceba que nosso comando não possui parâmetros
+            string comandosql = "select * from condominio";
+            //Criacao do objeto de comando (envelope)
+            MySqlCommand envelope = new MySqlCommand();
+            //Coloca o comando SQL dentro do envelope
+            envelope.CommandText = comandosql;
+            //Indica ao envelope por qual canal de comunicacao ele será enviado
+            envelope.Connection = con;
+            //Criação do nosso objeto cursor
+            MySqlDataReader cursor = envelope.ExecuteReader();
+            while (cursor.Read()) 
+            {
+                //Usamos o cursor para recuperar o conteúdo de cada coluna de uma linha de dados
+                MessageBox.Show(cursor.GetString("nome") + "\n" + cursor.GetString("endereco") + "\n" + cursor.GetInt32("numero") + "\n" + cursor.GetString("cep"));
+            }
+
+
         }
     }
 }

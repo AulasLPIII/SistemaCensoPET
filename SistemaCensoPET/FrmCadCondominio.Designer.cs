@@ -98,6 +98,7 @@
             toolStripBtnListar.Name = "toolStripBtnListar";
             toolStripBtnListar.Size = new Size(68, 68);
             toolStripBtnListar.Text = "Listar";
+            toolStripBtnListar.Click += toolStripBtnListar_Click;
             // 
             // toolStripSeparator3
             // 
