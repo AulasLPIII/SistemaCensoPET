@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySqlConnector;
+using SistemaCensoPET.Controller;
 using SistemaCensoPET.DTO;
 
 namespace SistemaCensoPET
@@ -32,17 +33,20 @@ namespace SistemaCensoPET
             //Conversao dos Numeros
             numero_num = Convert.ToInt32(numero);
 
-            //Criando um objeto Condominio
-            CondominioDTO condominiodto = new CondominioDTO(0, nome, endereco, numero_num, cep);
-            //condominiodao.salvar(condominiodto);
-
-
-            /*
+            //View se comunicando com o Controller
+            CondominioController condominioController = new CondominioController();
+            //Controller se comunicando com a View
+            int retorno = condominioController.SalvarCondominio(nome,endereco, numero_num, cep);
+                        
             if (retorno > 0)
             {
                 MessageBox.Show("Dados salvos com Sucesso!!!");
             }
-            */
+            else
+            {
+                MessageBox.Show("Algo deu errado!!!");
+            }
+            
         }
 
         private void toolStripBtnNovo_Click(object sender, EventArgs e)

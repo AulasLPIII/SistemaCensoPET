@@ -14,6 +14,14 @@ namespace SistemaCensoPET.DTO
         private int numero;
         private string cep;
 
+        public CondominioDTO(string nome, string endereco, int numero, string cep)
+        {
+            this.nome = nome;
+            this.endereco = endereco;
+            this.numero = numero;
+            this.cep = cep;
+        }
+
         public CondominioDTO(int id, string nome, string endereco, int numero, string cep)
         {
             this.id = id;

@@ -1,5 +1,6 @@
 ﻿using MySqlConnector;
 using SistemaCensoPET.DTO;
+using SistemaCensoPET.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,41 +13,74 @@ namespace SistemaCensoPET.DAO
     public class CondominioDAO
     {
 
-        public void salvar(CondominioDTO condominiodto)
+        private MySqlConnection con;
+        private string? comandosql;//A interrogação indica que este atributo pode receber valores null
+        private MySqlCommand? envelope;//Precisamos explicitar que isso pode acontecer
+        private MySqlDataReader? cursor;
+
+        public CondominioDAO()
         {
-            //Conexao com o Banco de Dados
-            string strconexao = "";
-            //String de Conexao com o Banco de Dados
-            strconexao = "server=localhost;userid=professor;password=professor@;database=bdcensopet";
-            //Criação do Canal de Comunicação
-            MySqlConnection con = new MySqlConnection(strconexao);
+            ConexaoBD conexaobd = new ConexaoBD();
+            this.con = conexaobd.RetornaConexao();
+         
+        }
+        public int salvar(CondominioDTO condominiodto)
+        {
+
             //O canal é criado fechado, para usarmos devemos abrí-lo
             con.Open();
             //Comando SQL (insert)
-            string comandosql = "insert into condominio (nome, endereco, numero, cep) values (@nome,@endereco,@numero,@cep)";
+            comandosql = "insert into condominio (nome, endereco, numero, cep) values (@nome,@endereco,@numero,@cep)";
             //Criacao do objeto de comando (envelope)
-            MySqlCommand envelope = new MySqlCommand();
+            envelope = new MySqlCommand();
             //Indica ao envelope por qual canal de comunicacao ele será enviado
             envelope.Connection = con;
             //Coloca o comando SQL dentro do envelope
             envelope.CommandText = comandosql;
-            //Neste ponto estamos dando ao parâmetro "@nome" o valor da variável "nome"
+            //Neste ponto estamos dando ao parâmetro "@nome" o valor da Propriedade "Nome"
             envelope.Parameters.AddWithValue("@nome", condominiodto.Nome);
             //As três linhas abaixo (comentadas) fazem a mesma ação da unica linha acima
             //MySqlParameter parameter = new MySqlParameter();
             //parameter.ParameterName = "@nome";
             //parameter.Value = nome;
-            //Neste ponto estamos dando ao parâmetro "@endereco" o valor da variável "endereco"
+            //Neste ponto estamos dando ao parâmetro "@endereco" o valor da Propriedade "Endereco"
             envelope.Parameters.AddWithValue("@endereco", condominiodto.Endereco);
-            //Neste ponto estamos dando ao parâmetro "@numero" o valor da variável "numero_num"
+            //Neste ponto estamos dando ao parâmetro "@numero" o valor da Propriedade "Numero"
             envelope.Parameters.AddWithValue("@numero", condominiodto.Numero);
-            //Neste ponto estamos dando ao parâmetro "@cep" o valor da variável "cep"
+            //Neste ponto estamos dando ao parâmetro "@cep" o valor da Propriedade "Cep"
             envelope.Parameters.AddWithValue("@cep", condominiodto.Cep);
             //Cria uma versão preparada do comando em uma instância do SQL Server.
             envelope.Prepare();
             //Executa o comando SQL na instância apontada
             //Ele retorna um valor inteiro que representa a quantidade de linhas afetadas
             int retorno = envelope.ExecuteNonQuery();
+            //Fechar o canal de comunicação
+            con.Close();
+
+            return retorno;
+        }
+
+        public void ListarTodos()
+        {
+            //O canal é criado fechado, para usarmos devemos abrí-lo
+            con.Open();
+            //Comando SQL (SELECT)
+            //Perceba que nosso comando não possui parâmetros
+            comandosql = "select * from condominio";
+            //Criacao do objeto de comando (envelope)
+            envelope = new MySqlCommand();
+            //Coloca o comando SQL dentro do envelope
+            envelope.CommandText = comandosql;
+            //Indica ao envelope por qual canal de comunicacao ele será enviado
+            envelope.Connection = con;
+            //Criação do nosso objeto cursor
+            cursor = envelope.ExecuteReader();
+            while (cursor.Read())
+            {
+                //Usamos o cursor para recuperar o conteúdo de cada coluna de uma linha de dados
+                CondominioDTO condominiodto = new CondominioDTO(cursor.GetInt32("idcondominio"), cursor.GetString("nome"), cursor.GetString("endereco"), cursor.GetInt32("numero"), cursor.GetString("cep"));
+                //MessageBox.Show(condominiodto.Nome + "\n" + condominiodto.Endereco + "\n" + condominiodto.Numero + "\n" + condominiodto.Cep);
+            }
         }
     }
 }
