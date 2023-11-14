@@ -20,5 +20,15 @@ namespace SistemaCensoPET.Controller
             int retorno = condominiodao.salvar(condominiodto);
             return retorno;
         }
+
+        public List<CondominioDTO> ListarTodosCondominios()
+        {
+            //Controller se comunicando com o DAO
+            CondominioDAO condominiodao = new CondominioDAO();
+            //Recebendo a lista de condominios do DAO
+            List<CondominioDTO> listacond = condominiodao.ListarTodos();
+            //Retornando a lista obtida para a View
+            return listacond;
+        }
     }
 }

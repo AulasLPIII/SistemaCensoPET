@@ -60,8 +60,11 @@ namespace SistemaCensoPET.DAO
             return retorno;
         }
 
-        public void ListarTodos()
+        public List<CondominioDTO> ListarTodos()
         {
+            //Criação da Lista que irá guardar objetos condominios
+            List<CondominioDTO> listacond = new List<CondominioDTO>();
+
             //O canal é criado fechado, para usarmos devemos abrí-lo
             con.Open();
             //Comando SQL (SELECT)
@@ -78,9 +81,15 @@ namespace SistemaCensoPET.DAO
             while (cursor.Read())
             {
                 //Usamos o cursor para recuperar o conteúdo de cada coluna de uma linha de dados
+                //Criação de um objeto condominio com dados do banco de dados
                 CondominioDTO condominiodto = new CondominioDTO(cursor.GetInt32("idcondominio"), cursor.GetString("nome"), cursor.GetString("endereco"), cursor.GetInt32("numero"), cursor.GetString("cep"));
-                //MessageBox.Show(condominiodto.Nome + "\n" + condominiodto.Endereco + "\n" + condominiodto.Numero + "\n" + condominiodto.Cep);
+                //Adicionando objetos Condominios a Lista de Condominios
+                //Desta forma todos os registros do banco de dados ficam
+                //guardados dentro desta lista
+                listacond.Add(condominiodto);
             }
+            con.Close();
+            return listacond;
         }
     }
 }

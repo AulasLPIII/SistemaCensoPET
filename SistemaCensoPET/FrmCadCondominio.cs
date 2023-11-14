@@ -61,30 +61,16 @@ namespace SistemaCensoPET
 
         private void toolStripBtnListar_Click(object sender, EventArgs e)
         {
-            //String de Conexao com o Banco de Dados
-            string strconexao = "server=localhost;userid=professor;password=professor@;database=bdcensopet";
-            //Criação do Canal de Comunicação
-            MySqlConnection con = new MySqlConnection(strconexao);
-            //O canal é criado fechado, para usarmos devemos abrí-lo
-            con.Open();
-            //Comando SQL (SELECT)
-            //Perceba que nosso comando não possui parâmetros
-            string comandosql = "select * from condominio";
-            //Criacao do objeto de comando (envelope)
-            MySqlCommand envelope = new MySqlCommand();
-            //Coloca o comando SQL dentro do envelope
-            envelope.CommandText = comandosql;
-            //Indica ao envelope por qual canal de comunicacao ele será enviado
-            envelope.Connection = con;
-            //Criação do nosso objeto cursor
-            MySqlDataReader cursor = envelope.ExecuteReader();
-            while (cursor.Read()) 
+            //View se comunicando com o Controller
+            CondominioController condominioController = new CondominioController();
+            //Controller se comunicando com a View
+            List<CondominioDTO> lista = condominioController.ListarTodosCondominios();
+            //O foreach permite que possamos navegar na lista obtendo
+            //os objetos presentes nela
+            foreach (CondominioDTO condominiodto in lista)
             {
-                //Usamos o cursor para recuperar o conteúdo de cada coluna de uma linha de dados
-                CondominioDTO condominiodto = new CondominioDTO(cursor.GetInt32("idcondominio"), cursor.GetString("nome"), cursor.GetString("endereco"), cursor.GetInt32("numero"), cursor.GetString("cep"));
-                MessageBox.Show(condominiodto.Nome + "\n" + condominiodto.Endereco + "\n" + condominiodto.Numero + "\n" + condominiodto.Cep);
+                MessageBox.Show(condominiodto.Nome);
             }
-
 
         }
     }
